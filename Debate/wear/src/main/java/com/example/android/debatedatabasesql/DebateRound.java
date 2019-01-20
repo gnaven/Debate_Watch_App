@@ -7,6 +7,7 @@ import org.json.JSONObject;
 public class DebateRound {
 
     //fields
+    private int debateID;
     private String watchID;
     private String date;
     private String timestamp;
@@ -18,7 +19,8 @@ public class DebateRound {
     //constructors
     public DebateRound() {}
 
-    public DebateRound (String watchID, String date, String timestamp, int roundID, String heartbeat, String acc, String gyro) {
+    public DebateRound (int debateID, String watchID, String date, String timestamp, int roundID, String heartbeat, String acc, String gyro) {
+        this.debateID = debateID;
         this.watchID = watchID;
         this.date = date;
         this.timestamp = timestamp;
@@ -29,6 +31,14 @@ public class DebateRound {
     }
 
     //properties
+
+    public void setDebateID(int id) {
+        this.debateID = id;
+    }
+
+    public int getDebateID() {
+        return this.debateID;
+    }
 
     public void setWatchID(String id) {
         this.watchID = id;
