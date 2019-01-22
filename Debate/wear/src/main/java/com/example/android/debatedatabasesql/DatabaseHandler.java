@@ -27,10 +27,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + "(" + COLUMN_ID +
-                "INTEGER PRIMARY KEY," + COLUMN_1 + "TEXT," + COLUMN_2 + "TEXT," +
-                COLUMN_3 + "TEXT," + COLUMN_4 + "TEXT," + COLUMN_5 + "TEXT," +
-                COLUMN_6 + "TEXT," + COLUMN_7 + "TEXT)";
+        String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME
+                + "("
+                + "COLUMN_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
+                + COLUMN_1 + " TEXT, "
+                + COLUMN_2 + " TEXT, "
+                + COLUMN_3 + " TEXT, "
+                + COLUMN_4 + " INTEGER, "
+                + COLUMN_5 + " TEXT,"
+                + COLUMN_6 + " TEXT, "
+                + COLUMN_7 + " TEXT);"
+                ;
         db.execSQL(CREATE_TABLE);
 
     }
@@ -65,14 +72,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public void addHandler(DebateRound debateRound) {
         ContentValues values = new ContentValues();
-        values.put(COLUMN_ID, debateRound.getDebateID());
         values.put(COLUMN_1, debateRound.getWatchID());
         values.put(COLUMN_2, debateRound.getDate());
         values.put(COLUMN_3, debateRound.getTimestamp());
         values.put(COLUMN_4, debateRound.getRoundID());
-        values.put(COLUMN_5, debateRound.getHeartbeat().toString());
-        values.put(COLUMN_6, debateRound.getAcc().toString());
-        values.put(COLUMN_7, debateRound.getGyro().toString());
+        values.put(COLUMN_5, debateRound.getHeartbeat());
+        values.put(COLUMN_6, debateRound.getAcc());
+        values.put(COLUMN_7, debateRound.getGyro());
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(TABLE_NAME, null, values);
         db.close();
@@ -94,9 +100,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     }
 
-    public boolean deleteHandlerByDate(String date) {
-        return false;
-
+    public boolean deleteHandlerByID(int ID) {
+        boolean result = false;
+        String query = "Select * FROM " + TABLE_NAME + " WHERE " + "COLUMN_ID = " + String.valueOf(ID);
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        DebateRound debate = new DebateRound();
+        if (cursor.moveToFirst()) {
+            String[] a = {String.valueOf(ID)};
+            db.delete(TABLE_NAME, "COLUMN_ID" + "=?", a);
+            cursor.close();
+            result = true;
+        }
+        db.close();
+        return result;
     }
 
     public boolean updateHandler(int ID, String name) {

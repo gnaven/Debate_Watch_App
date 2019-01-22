@@ -7,7 +7,6 @@ import org.json.JSONObject;
 public class DebateRound {
 
     //fields
-    private int debateID;
     private String watchID;
     private String date;
     private String timestamp;
@@ -19,8 +18,7 @@ public class DebateRound {
     //constructors
     public DebateRound() {}
 
-    public DebateRound (int debateID, String watchID, String date, String timestamp, int roundID, String heartbeat, String acc, String gyro) {
-        this.debateID = debateID;
+    public DebateRound (String watchID, String date, String timestamp, int roundID, String heartbeat, String acc, String gyro) {
         this.watchID = watchID;
         this.date = date;
         this.timestamp = timestamp;
@@ -31,14 +29,6 @@ public class DebateRound {
     }
 
     //properties
-
-    public void setDebateID(int id) {
-        this.debateID = id;
-    }
-
-    public int getDebateID() {
-        return this.debateID;
-    }
 
     public void setWatchID(String id) {
         this.watchID = id;
@@ -77,41 +67,44 @@ public class DebateRound {
         this.heartbeat = data.toString();
     }
 
-    public JSONObject getHeartbeat() {
-        try{
-        JSONObject obj =  new JSONObject(this.heartbeat);
-            return obj;
-        } catch (JSONException e){
-            Log.e("tag", "Error parsing JSONObject", e);
-            return null;
-        }
+    public String getHeartbeat() {
+        return this.heartbeat;
+//        try{
+//        JSONObject obj =  new JSONObject(this.heartbeat);
+//            return obj;
+//        } catch (JSONException e){
+//            Log.e("tag", "Error parsing JSONObject", e);
+//            return null;
+//        }
     }
 
     public void setAcc(JSONObject data) {
         this.acc = data.toString();
     }
 
-    public JSONObject getAcc() {
-        try{
-            JSONObject obj =  new JSONObject(this.acc);
-            return obj;
-        } catch (JSONException e){
-            Log.e("tag", "Error parsing JSONObject", e);
-            return null;
-        }
+    public String getAcc() {
+        return this.acc;
+//        try{
+//            JSONObject obj =  new JSONObject(this.acc);
+//            return obj;
+//        } catch (JSONException e){
+//            Log.e("tag", "Error parsing JSONObject", e);
+//            return null;
+//        }
     }
 
     public void setGyro(JSONObject data) {
         this.gyro = data.toString();
     }
 
-    public JSONObject getGyro() {
-        try{
-            JSONObject obj =  new JSONObject(this.gyro);
-            return obj;
-        } catch (JSONException e){
-            Log.e("tag", "Error parsing JSONObject", e);
-            return null;
-        }
+    public String getGyro() {
+        return this.gyro;
+//        try{
+//            JSONObject obj =  new JSONObject(this.gyro);
+//            return obj;
+//        } catch (JSONException e){
+//            Log.e("tag", "Error parsing JSONObject", e);
+//            return null;
+//        }
     }
 }
