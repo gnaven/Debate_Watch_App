@@ -19,15 +19,14 @@
             android:id="@+id/start_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:onClick="onClickStartButton"
+            android:layout_gravity="center_vertical"
             android:text="Start" />
 
         <Button
             android:id="@+id/stop_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="onClickStopButton"
+            android:visibility="invisible"
             android:layout_gravity="center_vertical"
             android:text="Stop" />
 
@@ -35,10 +34,16 @@
             android:id="@+id/reset_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="onClickResetButton"
             android:layout_gravity="bottom"
             android:text="Reset" />
 
+        <Button
+            android:id="@+id/save_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:layout_gravity="bottom"
+            android:text="Save" />
         <Button
             android:id="@+id/next_button"
             android:layout_width="65dp"
@@ -50,48 +55,55 @@
 
         <Button
             android:id="@+id/prev_button"
-            android:layout_width="67dp"
+            android:layout_width="65dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
-            android:visibility="invisible"
             android:onClick="onClickPreviousButton"
             android:text="Previous"
-            android:textSize="8dp" />
+            android:textSize="10dp"
+            android:visibility="invisible" />
 
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="65dp"
-            android:layout_height="48dp"
+        <FrameLayout
+            android:layout_width="160dp"
+            android:layout_height="45dp"
             android:layout_gravity="right">
 
             <TextView
                 android:id="@+id/text_timer"
-                android:layout_width="35dp"
-                android:layout_height="17dp"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_gravity="right|center"
                 android:layout_marginEnd="18dp"
                 android:text="@string/timer"
-                app:layout_constraintEnd_toEndOf="parent" />
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:layout_editor_absoluteY="14dp" />
 
             <TextView
                 android:id="@+id/text_round"
-                android:layout_width="42dp"
-                android:layout_height="24dp"
-                android:layout_gravity="right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|bottom"
                 android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
                 android:text="@string/round"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                android:textAlignment="center"
+                android:textSize="20dp" />
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent" -->
 
             <TextView
                 android:id="@+id/round_num_text"
-                android:layout_width="15dp"
-                android:layout_height="22dp"
-                android:layout_gravity="right"
-                android:layout_marginBottom="2dp"
+                android:layout_width="22dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|bottom"
+                android:layout_marginBottom="8dp"
                 android:text="@string/round_num"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/text_round" />
-        </android.support.constraint.ConstraintLayout>
+                android:textAlignment="center"
+                android:textSize="18dp" />
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--tools:layout_editor_absoluteX="66dp" />-->
+        </FrameLayout>
 
 
     </FrameLayout>
