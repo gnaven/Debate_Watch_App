@@ -6,4 +6,6 @@
     <string name="Accelerometer">Accelerometer</string>
     <string name="Gyroscope">Gyroscope</string>
     <string name="Add">Add</string>
+    <string name="Last">Last</string>
+    <string name="Post">PostToDatabase</string>
 </resources>

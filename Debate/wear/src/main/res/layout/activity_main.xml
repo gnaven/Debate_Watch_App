@@ -52,6 +52,22 @@
             android:textSize="12sp"
             android:onClick="loadDatabase"
             android:layout_gravity="end|center_vertical"/>
+        
+        <Button
+            android:id="@+id/lastEntry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Last"
+            android:textSize="12sp"
+            android:onClick="lastEntry"/>
+
+        <Button
+            android:id="@+id/postToDatabase"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Post"
+            android:textSize="12sp"
+            android:onClick="PostJSONRequest"/>
 
         <Button
             android:id="@+id/btnadd"

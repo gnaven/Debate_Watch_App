@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -41,7 +42,7 @@ public class MainActivity extends WearableActivity {
     static String tempTimeStamp;
     static String tempCurrentDate;
 
-    static final String postingURL = "postingURL";
+    static final String postingURL = "http://10.0.2.2:28017/dataPOST";
     static final String gettingURL = "gettingURL";
 
     RequestQueue requestQueue;
@@ -78,6 +79,14 @@ public class MainActivity extends WearableActivity {
         Log.d("DebateApp", "-- End --");
     }
 
+//    public void lastEntry(View view) {
+//        DatabaseHandler dbHandler = new DatabaseHandler(this, null, null, 1);
+//        Log.d("DebateApp", "Database Last Entry");
+//        Log.d("DebateApp", "-- Start --");
+//        Log.d("DebateApp", dbHandler.lastEntry());
+//        Log.d("DebateApp", "-- End --");
+//    }
+
     public void addData(View view) {
         DatabaseHandler dbHandler = new DatabaseHandler(this, null, null, 1);
         String watchID = mWatchID.getText().toString();
@@ -105,6 +114,7 @@ public class MainActivity extends WearableActivity {
 
     //Volley Methods
     public void GetJSONResponse(View v) {
+        DatabaseHandler dbHandler = new DatabaseHandler(this, null, null, 1);
         String url = gettingURL;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -124,21 +134,24 @@ public class MainActivity extends WearableActivity {
     }
 
     public void PostJSONRequest(View v) {
+        DatabaseHandler dbHandler = new DatabaseHandler(this, null, null, 1);
+        JSONObject catchLastEntry = dbHandler.lastEntry();
         JSONObject json = new JSONObject();
         try {
-            json.put("WatchID", mWatchID.getText());
-            json.put("RoundID", tempRoundID);
-            json.put("Heartbeat", mHeartbeat.getText());
-            json.put("Accelerometer", mAccelerometer.getText());
-            json.put("Gyroscope", mGyroscope.getText());
-            json.put("TimeStamp", tempTimeStamp);
-            json.put("Date", tempCurrentDate);
+            json.put("primary_key", catchLastEntry.getInt("primary_key"));
+            json.put("WatchID", catchLastEntry.getString("WatchID"));
+            json.put("RoundID", catchLastEntry.getString("RoundID"));
+            json.put("Heartbeat", catchLastEntry.getString("Heartbeat"));
+            json.put("Accelerometer", catchLastEntry.getString("Accelerometer"));
+            json.put("Gyroscope", catchLastEntry.getString("Gyroscope"));
+            json.put("TimeStamp", catchLastEntry.getString("TimeStamp"));
+            json.put("Date", catchLastEntry.getString("Date"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
         String url = postingURL;
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, null,
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, json,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -149,6 +162,7 @@ public class MainActivity extends WearableActivity {
             public void onErrorResponse(VolleyError error) {
                 Log.e("Server Response", "Error posting response");
             }
+
         });
 
         jsonObjectRequest.setTag(REQ_TAG);

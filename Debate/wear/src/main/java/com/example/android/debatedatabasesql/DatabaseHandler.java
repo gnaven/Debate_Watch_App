@@ -1,10 +1,15 @@
 package com.example.android.debatedatabasesql;
 
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.content.Context;
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.util.Log;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 public class DatabaseHandler extends SQLiteOpenHelper {
@@ -68,6 +73,44 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return result;
+    }
+
+    public JSONObject lastEntry() {
+        String query= "SELECT * FROM " + TABLE_NAME +" ORDER BY COLUMN_ID DESC LIMIT 1";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        Log.d("cursor", DatabaseUtils.dumpCursorToString(cursor));
+        Log.d("cursorCheck", Integer.toString(cursor.getColumnIndexOrThrow("COLUMN_ID")));
+        int column_primaryKey = 0;
+        String watchID = "", date = "", timestamp = "", roundID = "", heartbeat = "",
+                accelerometer = "", gyroscope = "";
+        if (cursor != null && cursor.moveToFirst()) {
+            column_primaryKey = cursor.getInt(0);
+            watchID = cursor.getString(1);
+            date = cursor.getString(2);
+            timestamp = cursor.getString(3);
+            roundID = cursor.getString(4);
+            heartbeat = cursor.getString(5);
+            accelerometer = cursor.getString(6);
+            gyroscope = cursor.getString(7);
+        }
+        cursor.close();
+
+        JSONObject json = new JSONObject();
+        try {
+            json.put("primary_key", column_primaryKey);
+            json.put("WatchID", watchID);
+            json.put("RoundID", roundID);
+            json.put("Heartbeat", heartbeat);
+            json.put("Accelerometer", accelerometer);
+            json.put("Gyroscope", gyroscope);
+            json.put("TimeStamp", timestamp);
+            json.put("Date", date);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return json;
     }
 
     public void addHandler(DebateRound debateRound) {
