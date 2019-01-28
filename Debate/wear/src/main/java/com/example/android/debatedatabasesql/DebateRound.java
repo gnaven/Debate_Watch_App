@@ -67,41 +67,44 @@ public class DebateRound {
         this.heartbeat = data.toString();
     }
 
-    public JSONObject getHeartbeat() {
-        try{
-        JSONObject obj =  new JSONObject(this.heartbeat);
-            return obj;
-        } catch (JSONException e){
-            Log.e("tag", "Error parsing JSONObject", e);
-            return null;
-        }
+    public String getHeartbeat() {
+        return this.heartbeat;
+//        try{
+//        JSONObject obj =  new JSONObject(this.heartbeat);
+//            return obj;
+//        } catch (JSONException e){
+//            Log.e("tag", "Error parsing JSONObject", e);
+//            return null;
+//        }
     }
 
     public void setAcc(JSONObject data) {
         this.acc = data.toString();
     }
 
-    public JSONObject getAcc() {
-        try{
-            JSONObject obj =  new JSONObject(this.acc);
-            return obj;
-        } catch (JSONException e){
-            Log.e("tag", "Error parsing JSONObject", e);
-            return null;
-        }
+    public String getAcc() {
+        return this.acc;
+//        try{
+//            JSONObject obj =  new JSONObject(this.acc);
+//            return obj;
+//        } catch (JSONException e){
+//            Log.e("tag", "Error parsing JSONObject", e);
+//            return null;
+//        }
     }
 
     public void setGyro(JSONObject data) {
         this.gyro = data.toString();
     }
 
-    public JSONObject getGyro() {
-        try{
-            JSONObject obj =  new JSONObject(this.gyro);
-            return obj;
-        } catch (JSONException e){
-            Log.e("tag", "Error parsing JSONObject", e);
-            return null;
-        }
+    public String getGyro() {
+        return this.gyro;
+//        try{
+//            JSONObject obj =  new JSONObject(this.gyro);
+//            return obj;
+//        } catch (JSONException e){
+//            Log.e("tag", "Error parsing JSONObject", e);
+//            return null;
+//        }
     }
 }

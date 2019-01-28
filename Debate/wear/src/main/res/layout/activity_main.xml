@@ -15,11 +15,53 @@
         android:padding="@dimen/inner_frame_layout_padding"
         app:boxedEdges="all">
 
-        <TextView
-            android:id="@+id/text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/hello_world" />
+        <EditText
+            android:id="@+id/watchID"
+            android:hint="@string/WatchID"
+            android:textSize="10sp"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:layout_gravity="top|start"/>
+        <EditText
+            android:id="@+id/heartbeat"
+            android:hint="@string/Heartbeat"
+            android:textSize="10sp"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start|center_vertical"/>
+        <EditText
+            android:id="@+id/acclerometer"
+            android:hint="@string/Accelerometer"
+            android:textSize="10sp"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start|bottom"/>
+        <EditText
+            android:id="@+id/gyroscope"
+            android:hint="@string/Gyroscope"
+            android:textSize="10sp"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:layout_gravity="top|end"/>
+
+        <Button
+            android:id="@+id/btnload"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:text="@string/Load"
+            android:textSize="12sp"
+            android:onClick="loadDatabase"
+            android:layout_gravity="end|center_vertical"/>
+
+        <Button
+            android:id="@+id/btnadd"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:text="@string/Add"
+            android:textSize="12sp"
+            android:onClick="addData"
+            android:layout_gravity="end|bottom"/>
+
 
     </FrameLayout>
 </android.support.wear.widget.BoxInsetLayout>

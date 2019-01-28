@@ -1,3 +1,9 @@
 <resources>
     <string name="hello_world">Hello Round World!</string>
+    <string name="Load">Load</string>
+    <string name="WatchID">WatchID</string>
+    <string name="Heartbeat">Heartbeat</string>
+    <string name="Accelerometer">Accelerometer</string>
+    <string name="Gyroscope">Gyroscope</string>
+    <string name="Add">Add</string>
 </resources>
